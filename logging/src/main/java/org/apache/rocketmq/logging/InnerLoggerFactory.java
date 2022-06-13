@@ -17,6 +17,7 @@
 
 package org.apache.rocketmq.logging;
 
+import org.apache.rocketmq.logging.inner.Level;
 import org.apache.rocketmq.logging.inner.Logger;
 
 import java.util.HashMap;
@@ -49,6 +50,10 @@ public class InnerLoggerFactory extends InternalLoggerFactory {
 
         public InnerLogger(String name) {
             logger = Logger.getLogger(name);
+        }
+
+        public void setLevel(String level){
+            logger.setLevel(Level.toLevel(level));
         }
 
         @Override
