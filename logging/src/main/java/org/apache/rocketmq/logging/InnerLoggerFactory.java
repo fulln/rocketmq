@@ -49,11 +49,7 @@ public class InnerLoggerFactory extends InternalLoggerFactory {
         private Logger logger;
 
         public InnerLogger(String name) {
-            logger = Logger.getLogger(name);
-        }
-
-        public void setLevel(String level){
-            logger.setLevel(Level.toLevel(level));
+            logger = Logger.getSystemLevelLogger(name);
         }
 
         @Override

@@ -17,6 +17,8 @@
 
 package org.apache.rocketmq.logging.inner;
 
+import org.apache.rocketmq.logging.InternalLoggerFactory;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -28,8 +30,14 @@ public class Logger implements Appender.AppenderPipeline {
 
     private static final DefaultLoggerRepository REPOSITORY = new DefaultLoggerRepository(new RootLogger(Level.DEBUG));
 
+    private static final DefaultLoggerRepository SYSTEM_REPOSITORY = new DefaultLoggerRepository(new RootLogger());
+
     public static LoggerRepository getRepository() {
         return REPOSITORY;
+    }
+
+    public static LoggerRepository getSystemRepository() {
+        return SYSTEM_REPOSITORY;
     }
 
     private String name;
@@ -48,6 +56,9 @@ public class Logger implements Appender.AppenderPipeline {
 
     static public Logger getLogger(String name) {
         return getRepository().getLogger(name);
+    }
+    static public Logger getSystemLevelLogger(String name){
+        return getSystemRepository().getLogger(name);
     }
 
     static public Logger getLogger(Class clazz) {
@@ -462,6 +473,12 @@ public class Logger implements Appender.AppenderPipeline {
         public RootLogger(Level level) {
             super("root");
             setLevel(level);
+        }
+
+        public RootLogger() {
+            super("root");
+            String level = System.getProperty(InternalLoggerFactory.INNER_LOGGER, "DEBUG");
+            setLevel(Level.toLevel(level));
         }
     }
 }
