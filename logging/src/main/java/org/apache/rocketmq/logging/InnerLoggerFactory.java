@@ -17,7 +17,6 @@
 
 package org.apache.rocketmq.logging;
 
-import org.apache.rocketmq.logging.inner.Level;
 import org.apache.rocketmq.logging.inner.Logger;
 
 import java.util.HashMap;
