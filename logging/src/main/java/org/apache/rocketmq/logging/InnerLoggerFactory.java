@@ -48,7 +48,7 @@ public class InnerLoggerFactory extends InternalLoggerFactory {
         private Logger logger;
 
         public InnerLogger(String name) {
-            logger = Logger.getSystemLevelLogger(name);
+            logger = Logger.getRepository().getLogger(name);
         }
 
         @Override
