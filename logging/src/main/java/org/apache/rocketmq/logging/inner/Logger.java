@@ -57,6 +57,7 @@ public class Logger implements Appender.AppenderPipeline {
     static public Logger getLogger(String name) {
         return getRepository().getLogger(name);
     }
+
     static public Logger getSystemLevelLogger(String name){
         return getSystemRepository().getLogger(name);
     }
@@ -477,7 +478,7 @@ public class Logger implements Appender.AppenderPipeline {
 
         public RootLogger() {
             super("root");
-            String level = System.getProperty(InternalLoggerFactory.INNER_LOGGER, "DEBUG");
+            String level = System.getProperty(InternalLoggerFactory.INTERNAL_LOG_LEVEL, "DEBUG");
             setLevel(Level.toLevel(level));
         }
     }
